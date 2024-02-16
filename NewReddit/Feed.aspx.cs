@@ -15,8 +15,15 @@ namespace NewReddit
         {
             if (!IsPostBack)
             {
-                lblLoggedUser.Text = "Welcome " + Session["Username"].ToString();
-                LoadPosts();
+                if (Session["Username"] != null)
+                {
+                    lblLoggedUser.Text = "Welcome " + Session["Username"].ToString();
+                    LoadPosts();
+                }
+                else
+                {
+                    Response.Redirect("~/LoginPage.aspx");
+                }
                 
             }
         }

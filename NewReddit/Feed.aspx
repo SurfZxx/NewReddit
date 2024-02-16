@@ -9,7 +9,8 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="lblLoggedUser" runat="server" Text=""></asp:Label><br />
+            <asp:Label ID="lblLoggedUser" runat="server" Text="" Font-Bold="True" Font-Italic="True"></asp:Label><br />
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Profile.aspx">Profile</asp:HyperLink>
             <br />
             <h1>Feed</h1><br />
         </div>
