@@ -57,7 +57,7 @@
             </table>
             
             <br />
-            <asp:Button ID="ButtonSubmit" runat="server" Text="Button" ValidationGroup="RegisterUserValidation" OnClick="ButtonSubmit_Click" />
+            <asp:Button ID="ButtonSubmit" runat="server" Text="Register" ValidationGroup="RegisterUserValidation" OnClick="ButtonSubmit_Click" />
             <br />
             <p>Already have an account? <asp:Button ID="Button1" runat="server" Text="Login" OnClick="Button1_Click"/>  </p>
             

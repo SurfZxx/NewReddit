@@ -14,11 +14,11 @@
             <table>
                 <tr>
                     <td>
-                        <p>Username: </p>                        
+                        <p>Username: </p>           
                     </td>
                     <td>
                         <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFielUsername" runat="server" ErrorMessage="Required Field" ControlToValidate="txtUsername"></asp:RequiredFieldValidator>   
+                        <asp:RequiredFieldValidator ID="RequiredFielUsername" runat="server" ErrorMessage="Required Field" ControlToValidate="txtUsername" ValidationGroup="GroupLogin"></asp:RequiredFieldValidator>   
                     </td>
                 </tr>
                 <tr>
@@ -27,7 +27,7 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required Field" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>   
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required Field" ControlToValidate="txtPassword" ValidationGroup="GroupLogin"></asp:RequiredFieldValidator>   
 
                     </td>
                 </tr>
