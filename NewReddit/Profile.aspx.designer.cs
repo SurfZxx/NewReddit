@@ -33,6 +33,24 @@ namespace NewReddit
         protected global::System.Web.UI.WebControls.Label lblLoggedUser;
 
         /// <summary>
+        /// ButtonLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonLogout;
+
+        /// <summary>
+        /// btnFeed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFeed;
+
+        /// <summary>
         /// lblUserProfile control.
         /// </summary>
         /// <remarks>

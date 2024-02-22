@@ -80,14 +80,46 @@ namespace NewReddit
         {
             int postID = Convert.ToInt32(e.CommandArgument);
             string username = Session["Username"].ToString();
-            AddLike(postID, username);
-            LoadPosts();
+            if (!isITLiked(postID,username) && !isITDisliked(postID,username))
+            {
+                AddLike(postID, username);
+                LoadPosts();
+            }
+            else if (!isITLiked(postID,username) && isITDisliked(postID,username))
+            {
+                RemoveLike(postID, username);
+                AddLike(postID, username);
+                LoadPosts();
+            }
+            else if (isITLiked(postID, username))
+            {
+                RemoveLike(postID, username);
+                LoadPosts();
+            }
+            
+        }
+
+        protected bool isITLiked(int postId, string username)
+        {
+            String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(CS))
+            {
+                string query = "SELECT COUNT(*) FROM PostVotes WHERE PostId = @PostId AND Username = @Username AND VoteType=1";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@PostId", postId);
+                    cmd.Parameters.AddWithValue("@Username", username);
+
+                    conn.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    conn.Close();
+                    return count > 0;
+                }
+            }
         }
 
         protected void AddLike(int postID, string username)
         {
-            username = Session["Username"].ToString();
-
             String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
@@ -103,12 +135,62 @@ namespace NewReddit
             }
         }
 
+        protected void RemoveLike(int postId, string username)
+        {
+            String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                string query = "DELETE FROM PostVotes WHERE Username=@Username AND PostId=@PostId";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@PostId", postId);
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+
         protected void btnDislike_Command(object sender, CommandEventArgs e)
         {
             int postID = Convert.ToInt32(e.CommandArgument);
             string username = Session["Username"].ToString();
-            AddDislike(postID, username);
-            LoadPosts();
+            if (!isITDisliked(postID,username) && !isITLiked(postID,username))
+            {
+                AddDislike(postID, username);
+                LoadPosts();
+            } 
+            else if (!isITDisliked(postID, username) && isITLiked(postID, username))
+            {
+                RemoveLike(postID, username);
+                AddDislike(postID, username);
+                LoadPosts();
+            }
+            else if (isITDisliked(postID,username))
+            {
+                RemoveLike(postID, username);
+                LoadPosts();
+            }
+        }
+
+        protected bool isITDisliked(int postId, string username)
+        {
+            String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(CS))
+            {
+                string query = "SELECT COUNT(Username) FROM PostVotes WHERE PostId = @PostId AND Username = @Username AND VoteType=-1";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@PostId", postId);
+                    cmd.Parameters.AddWithValue("@Username", username);
+
+                    conn.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    conn.Close();
+                    return count > 0;
+                }
+            }
         }
 
         protected void AddDislike(int postID, string username)
@@ -130,8 +212,10 @@ namespace NewReddit
             }
         }
 
-        protected void btnComment_Click(object sender, EventArgs e)
+        protected void btnComment_Command(object sender, CommandEventArgs e)
         {
+            int postID = Convert.ToInt32(e.CommandArgument);
+            Response.Redirect($"PostPage.aspx?postId={postID}");
 
         }
 

@@ -9,7 +9,14 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="lblLoggedUser" runat="server" Text=""></asp:Label><br /><br />
+            <div>
+    <asp:Label ID="lblLoggedUser" runat="server" Text="" Font-Bold="True" Font-Italic="True"></asp:Label><br />
+    <br /><br /><br /><br />
+    <asp:Button ID="ButtonLogout" runat="server" Text="Logout" OnClick="ButtonLogout_Click" />
+    <br /><br /><br /><br />
+    <asp:Button ID="btnFeed" runat="server" Text="Feed" OnClick="btnFeed_Click" />
+    <br /><br />
+</div>
 <br />
         </div>
         <div title="Profile">

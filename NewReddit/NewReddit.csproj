@@ -126,6 +126,7 @@
     <Content Include="Feed.aspx" />
     <Content Include="Global.asax" />
     <Content Include="LoginPage.aspx" />
+    <Content Include="PostPage.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="RegisterPage.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -229,6 +230,13 @@
     </Compile>
     <Compile Include="LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostPage.aspx.cs">
+      <DependentUpon>PostPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PostPage.aspx.designer.cs">
+      <DependentUpon>PostPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>

@@ -30,7 +30,7 @@
                         <asp:Label ID="lblPostContent" runat="server" BorderColor="Black" BorderStyle="Dotted" Font-Size="Large"><%# Eval("Content") %></asp:Label><br /><br />
                         <asp:Button ID="btnLike" runat="server" Text="Like" CommandName="Like" OnCommand="btnLike_Command" CommandArgument='<%# Eval("PostId") %>' /><asp:Label ID="lblLikes" runat="server"></asp:Label>
                         <asp:Button ID="btnDislike" runat="server" Text="Dislike" CommandName="Dislike" OnCommand="btnDislike_Command" CommandArgument='<%# Eval("PostId") %>' /><asp:Label ID="lblDislikes" runat="server" ></asp:Label>
-                        <asp:Button ID="btnComment" runat="server" Text="Comments" OnClick="btnComment_Click" /><asp:Label ID="lblCommentCount" runat="server" Text=""></asp:Label>
+                        <asp:Button ID="btnComment" runat="server" Text="Comments" CommandName="Comment" CommandArgument='<%# Eval("PostID") %>' OnCommand="btnComment_Command" /><asp:Label ID="lblCommentCount" runat="server" Text=""></asp:Label>
                         <br />
                         <hr />
                         

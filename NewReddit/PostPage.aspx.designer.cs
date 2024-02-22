@@ -24,75 +24,75 @@ namespace NewReddit
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Label1 control.
+        /// lblLoggedUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblLoggedUser;
 
         /// <summary>
-        /// lblUsername control.
+        /// HyperLink1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUsername;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
 
         /// <summary>
-        /// lblPublishDate control.
+        /// ButtonLogout control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPublishDate;
+        protected global::System.Web.UI.WebControls.Button ButtonLogout;
 
         /// <summary>
-        /// lblPostContent control.
+        /// btnFeed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPostContent;
+        protected global::System.Web.UI.WebControls.Button btnFeed;
 
         /// <summary>
-        /// btnLike control.
+        /// RepeaterPost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLike;
+        protected global::System.Web.UI.WebControls.Repeater RepeaterPost;
 
         /// <summary>
-        /// lblLikes control.
+        /// txtCreateComment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLikes;
+        protected global::System.Web.UI.WebControls.TextBox txtCreateComment;
 
         /// <summary>
-        /// btnDislike control.
+        /// btnCreateComment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDislike;
+        protected global::System.Web.UI.WebControls.Button btnCreateComment;
 
         /// <summary>
-        /// lblDislikes control.
+        /// RepeaterComments control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDislikes;
+        protected global::System.Web.UI.WebControls.Repeater RepeaterComments;
     }
 }

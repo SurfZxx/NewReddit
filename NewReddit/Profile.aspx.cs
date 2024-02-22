@@ -53,16 +53,15 @@ namespace NewReddit
             }
         }
 
+        protected void btnFeed_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Feed.aspx");
+        }
 
-
-
-
-
-
-
-
-
-
-
+        protected void ButtonLogout_Click(object sender, EventArgs e)
+        {
+            Session["Username"] = null;
+            Response.Redirect("~/LoginPage.aspx");
+        }
     }
 }
