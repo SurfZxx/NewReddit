@@ -1,0 +1,33 @@
+create table Users (
+Username nvarchar(50) PRIMARY KEY,
+FirstName nvarchar(50),
+LastName nvarchar(50),
+Password nvarchar(50)
+);
+
+create table Posts (
+PostId INT IDENTITY(1,1) PRIMARY KEY,
+Content nvarchar(50),
+PublishDate DATE(),
+Username nvarchar(50),
+CONSTRAINT FK_Posts_Users FOREIGN KEY (Username) REFERENCES Users(Username)
+);
+
+CREATE TABLE PostVotes (
+VoteID INT PRIMARY KEY IDENTITY(1,1),
+PostID INT,
+Username NVARCHAR(50),
+VoteType INT, -- 1 para like, -1 para dislike
+CONSTRAINT FK_PostVotes_Posts FOREIGN KEY (PostID) REFERENCES Posts(PostID),
+CONSTRAINT FK_PostVotes_Users FOREIGN KEY (Username) REFERENCES Users(Username)
+);
+
+create table Comments (
+CommentId INT IDENTITY(1,1) PRIMARY KEY,
+Content nvarchar(50),
+PublishDate DATE(),
+Username nvarchar(50),
+PostId INT,
+CONSTRAINT FK_Comments_Users (Username) REFERENCES Users(Username),
+CONSTRAINT FK_Comments_Posts FOREIGN KEY (PostID) REFERENCES Posts(PostID)
+);

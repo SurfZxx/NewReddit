@@ -33,18 +33,19 @@
                 </div>
      </ItemTemplate>
     </asp:Repeater><br /><br /><br />
-        <h3>Create a Post</h3>
+        <h3>Comment</h3>
 <asp:TextBox ID="txtCreateComment" runat="server" TextMode="MultiLine"></asp:TextBox><br />
 <asp:Button ID="btnCreateComment" runat="server" Text="Comment" OnClick="btnCreateComment_Click" />
         <br />
         <br /><br />
         <br />
-        <asp:Repeater ID="RepeaterComments" runat="server">
+        <asp:Repeater ID="RepeaterComments" runat="server" >
             <ItemTemplate>
                 <div>
                     <asp:Label ID="lblCommentUsername" runat="server" Font-Bold="True" Font-Italic="True"><%# Eval("Username") %></asp:Label><br />
                     <asp:Label ID="lblCommentPublishDate" runat="server" Font-Size="Small">(<%# Eval("PublishDate") %>)</asp:Label><br /><br />
-                    <asp:Label ID="lblCommentContent" runat="server" BorderColor="Black" BorderStyle="Dotted" Font-Size="Large"><%# Eval("Content") %></asp:Label><br /><br /><hr />
+                    <asp:Label ID="lblCommentContent" runat="server" BorderColor="Black" BorderStyle="Dotted" Font-Size="Large"><%# Eval("Content") %></asp:Label>
+                     <br /><br /><hr />
                 </div>
             </ItemTemplate>
         </asp:Repeater>

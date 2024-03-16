@@ -86,7 +86,7 @@ namespace NewReddit
             String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(CS))
             {
-                string query = "SELECT Username, Content, PublishDate " +
+                string query = "SELECT Username, Content, PublishDate " +                                
                                 "FROM Comments " +
                                 "WHERE PostId = @PostId";
                 using (SqlCommand cmd = new SqlCommand(query,conn))
@@ -100,7 +100,6 @@ namespace NewReddit
                 }
             }
         }
-
 
         protected void btnLike_Command(object sender, CommandEventArgs e)
         {
@@ -278,5 +277,166 @@ namespace NewReddit
         {
             Response.Redirect("~/Feed.aspx");
         }
+
+
+        /*protected void RepeaterComments_DataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Label lblCommentLikes = (Label)e.Item.FindControl("lblCommentLikes");
+                Label lblCommentDislikes = (Label)e.Item.FindControl("lblCommentDislikes");
+
+                int likesCount = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "Likes"));
+                int dislikesCount = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "Dislikes"));
+
+                lblCommentLikes.Text = likesCount.ToString();
+                lblCommentDislikes.Text = dislikesCount.ToString();
+            }
+        }*/
+
+        /*
+        protected void btnCommentLike_Command(object sender, CommandEventArgs e)
+        {
+            int commentID = Convert.ToInt32(e.CommandArgument);
+            string username = Session["Username"].ToString();
+            if (!CommentisITLiked(commentID, username) && !CommentisITDisliked(commentID, username))
+            {
+                CommentAddLike(commentID, username);
+                LoadPost(commentID);
+            }
+            else if (!CommentisITLiked(commentID, username) && CommentisITDisliked(commentID, username))
+            {
+                CommentRemoveLike(commentID, username);
+                CommentAddLike(commentID, username);
+                LoadPost(commentID);
+            }
+            else if (CommentisITLiked(commentID, username))
+            {
+                CommentRemoveLike(commentID, username);
+                LoadPost(commentID);
+            }
+
+        }
+
+        protected void btnCommentDislike_Command(object sender, CommandEventArgs e)
+        {
+            int commentId = Convert.ToInt32(e.CommandArgument);
+            string username = Session["Username"].ToString();
+            if (!CommentisITDisliked(commentId, username) && !CommentisITLiked(commentId, username))
+            {
+                AddCommentDislike(commentId, username);
+                LoadPost(commentId);
+            }
+            else if (!CommentisITDisliked(commentId, username) && CommentisITLiked(commentId, username))
+            {
+                CommentRemoveLike(commentId, username);
+                AddCommentDislike(commentId, username);
+                LoadPost(commentId);
+            }
+            else if (CommentisITDisliked(commentId, username))
+            {
+                CommentRemoveLike(commentId, username);
+                LoadPost(commentId);
+            }
+
+        }
+
+        protected bool CommentisITDisliked(int commentId, string username)
+        {
+            String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(CS))
+            {
+                string query = "SELECT COUNT(Username) FROM CommentVotes WHERE CommentId = @CommentId AND Username = @Username AND VoteType=-1";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@CommentId", commentId);
+                    cmd.Parameters.AddWithValue("@Username", username);
+
+                    conn.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    conn.Close();
+                    return count > 0;
+                }
+            }
+        }
+
+        protected void AddCommentDislike(int commentId, string username)
+        {
+            username = Session["Username"].ToString();
+
+            String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                string query = "INSERT INTO CommentVotes(CommentId,Username,VoteType) VALUES (@CommentId, @Username, -1)";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@CommentId", commentId);
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+
+
+        protected void CommentRemoveLike(int commentId, string username)
+        {
+            String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                string query = "DELETE FROM CommentVotes WHERE Username=@Username AND CommentId=@CommentId";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@CommentId", commentId);
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+
+
+        protected bool CommentisITLiked(int commentId, string username)
+        {
+            String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(CS))
+            {
+                string query = "SELECT COUNT(*) FROM CommentVotes WHERE CommentId = @CommentId AND Username = @Username AND VoteType=1";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@CommentId", commentId);
+                    cmd.Parameters.AddWithValue("@Username", username);
+
+                    conn.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    conn.Close();
+                    return count > 0;
+                }
+            }
+        }
+
+        protected void CommentAddLike(int commentId, string username)
+        {
+            username = Session["Username"].ToString();
+
+            String CS = ConfigurationManager.ConnectionStrings["desktop-torregtx.Reddit.dbo"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                string query = "INSERT INTO CommentVotes(CommentId,Username,VoteType) VALUES (@CommentId, @Username, 1)";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@CommentId", commentId);
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }*/
+
+
+
     }
 }
