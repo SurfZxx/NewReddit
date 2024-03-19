@@ -28,6 +28,6 @@ Content nvarchar(50),
 PublishDate DATE(),
 Username nvarchar(50),
 PostId INT,
-CONSTRAINT FK_Comments_Users (Username) REFERENCES Users(Username),
+CONSTRAINT FK_Comments_Users FOREIGN KEY (Username) REFERENCES Users(Username),
 CONSTRAINT FK_Comments_Posts FOREIGN KEY (PostID) REFERENCES Posts(PostID)
 );
